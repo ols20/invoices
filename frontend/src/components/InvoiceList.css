@@ -1,0 +1,45 @@
+/* Styling for the InvoiceList component */
+.invoice-list {
+  margin: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.invoice-list h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.invoice-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoice-list th, .invoice-list td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.invoice-list th {
+  background-color: #f4f4f4;
+}
+
+.invoice-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.invoice-list tr:hover {
+  background-color: #f1f1f1;
+}
+
+.invoice-list button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.invoice-list button:hover {
+  background-color: #0056b3;
+}
