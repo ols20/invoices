@@ -154,6 +154,12 @@ const InvoiceDetails = () => {
     }
   };
 
+  // Helper to format amount with spaces as thousand separators
+  function formatAmount(amount) {
+    if (typeof amount !== 'number') return '';
+    return '$ ' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
+
   if (error) {
     return <p className="error-message">{error}</p>;
   }
@@ -178,7 +184,7 @@ const InvoiceDetails = () => {
       </div>
       <div className="field">
         <strong>Total Amount:</strong>
-        <span>${invoice.amount.toFixed(2)}</span>
+        <span>{formatAmount(invoice.amount)}</span>
       </div>
       <div className="field">
         <strong>Status:</strong>
@@ -212,7 +218,7 @@ const InvoiceDetails = () => {
                       />
                     </td>
                     <td>{item.description}</td>
-                    <td style={{textAlign: 'right'}}>${item.cost.toFixed(2)}</td>
+                    <td style={{textAlign: 'right'}}>{formatAmount(item.cost)}</td>
                     <td>
                       <input
                         type="text"

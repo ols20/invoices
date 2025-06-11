@@ -23,15 +23,11 @@ const InvoiceList = () => {
     }));
   };
 
+  // Update sorting logic to handle numeric sort for 'id'
   const sortedInvoices = [...invoices].sort((a, b) => {
     if (sortConfig.key === 'id') {
-      // sort by numeric value of id
-      const aId = parseInt(a.id, 10);
-      const bId = parseInt(b.id, 10);
-      if (isNaN(aId) || isNaN(bId)) {
-        return 0;
-      }
-      return sortConfig.direction === 'asc' ? aId - bId : bId - aId;
+      // Numeric sort for id
+      return (parseInt(a.id) - parseInt(b.id)) * (sortConfig.direction === 'asc' ? 1 : -1);
     }
     if (a[sortConfig.key] < b[sortConfig.key]) {
       return sortConfig.direction === 'asc' ? -1 : 1;
@@ -48,6 +44,12 @@ const InvoiceList = () => {
   );
 
   const totalPages = Math.ceil(invoices.length / itemsPerPage);
+
+  // Helper to format amount with spaces as thousand separators
+  function formatAmount(amount) {
+    if (typeof amount !== 'number') return '';
+    return '$ ' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  }
 
   return (
     <div className="invoice-list-container">
@@ -79,7 +81,7 @@ const InvoiceList = () => {
               <td>{invoice.id}</td>
               <td>{invoice.description}</td>
               <td>{new Date(invoice.date).toLocaleDateString()}</td>
-              <td>${(invoice.amount || 0).toFixed(2)}</td>
+              <td>{formatAmount(invoice.amount || 0)}</td>
               <td>{invoice.status || 'Unknown'}</td>
               <td>
                 <button

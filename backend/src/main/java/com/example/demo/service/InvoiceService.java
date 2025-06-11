@@ -21,82 +21,58 @@ public class InvoiceService {
         String[] statuses = {"Pending", "Paid", "Overdue"};
 
         // Adding 10 sample invoices with random dates, statuses, and line items
-        invoices.add(new Invoice("1", "Office Supplies", 150.75, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("1", "Invoice for Office Supplies", 150.75, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Paper", 50.00),
                 new Invoice.LineItem("Pens", 30.75),
                 new Invoice.LineItem("Folders", 70.00)
             )));
-        invoices.add(new Invoice("2", "IT Equipment", 1200.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("2", "Invoice for IT Equipment", 1200.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Laptop", 900.00),
                 new Invoice.LineItem("Monitor", 200.00),
                 new Invoice.LineItem("Keyboard", 100.00)
             )));
-        invoices.add(new Invoice("3", "Marketing Services", 500.50, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("3", "Invoice for Marketing Services", 500.50, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Social Media Ads", 200.00),
                 new Invoice.LineItem("Flyers", 100.50),
                 new Invoice.LineItem("Consulting", 200.00)
             )));
-        invoices.add(new Invoice("4", "Travel Expenses", 300.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("4", "Invoice for Travel Expenses", 300.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Flight", 200.00),
                 new Invoice.LineItem("Hotel", 100.00)
             )));
-        invoices.add(new Invoice("5", "Consulting Services", 800.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("5", "Invoice for Consulting Services", 800.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Strategy Session", 500.00),
                 new Invoice.LineItem("Follow-up", 300.00)
             )));
-        invoices.add(new Invoice("6", "Software Subscription", 99.99, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("6", "Invoice for Software Subscription", 99.99, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Monthly Subscription", 99.99)
             )));
-        invoices.add(new Invoice("7", "Maintenance Services", 450.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("7", "Invoice for Maintenance Services", 450.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("System Check", 200.00),
                 new Invoice.LineItem("Repairs", 250.00)
             )));
-        invoices.add(new Invoice("8", "Training Programs", 700.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("8", "Invoice for Training Programs", 700.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Workshop", 400.00),
                 new Invoice.LineItem("Materials", 300.00)
             )));
-        invoices.add(new Invoice("9", "Catering Services", 250.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("9", "Invoice for Catering Services", 250.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Lunch", 150.00),
                 new Invoice.LineItem("Drinks", 100.00)
             )));
-        invoices.add(new Invoice("10", "Event Management", 1500.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
+        invoices.add(new Invoice("10", "Invoice for Event Management", 1500.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
             List.of(
                 new Invoice.LineItem("Venue", 800.00),
                 new Invoice.LineItem("Staff", 400.00),
                 new Invoice.LineItem("Equipment", 300.00)
-            )));
-        invoices.add(new Invoice("11", "Graphic Design", 350.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
-            List.of(
-                new Invoice.LineItem("Logo Design", 200.00),
-                new Invoice.LineItem("Brand Guide", 150.00)
-            )));
-        invoices.add(new Invoice("12", "Web Hosting", 120.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
-            List.of(
-                new Invoice.LineItem("Annual Hosting", 120.00)
-            )));
-        invoices.add(new Invoice("13", "Photography", 600.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
-            List.of(
-                new Invoice.LineItem("Event Photos", 400.00),
-                new Invoice.LineItem("Editing", 200.00)
-            )));
-        invoices.add(new Invoice("14", "Cleaning Services", 220.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
-            List.of(
-                new Invoice.LineItem("Office Cleaning", 120.00),
-                new Invoice.LineItem("Window Cleaning", 100.00)
-            )));
-        invoices.add(new Invoice("15", "Security Services", 950.00, LocalDate.now().minusDays(random.nextInt(30)), statuses[random.nextInt(statuses.length)],
-            List.of(
-                new Invoice.LineItem("Night Guard", 600.00),
-                new Invoice.LineItem("Alarm Monitoring", 350.00)
             )));
     }
 
