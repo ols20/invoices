@@ -46,4 +46,14 @@ public class InvoiceController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/refund-request/{reference}")
+    public ResponseEntity<?> getRefundRequest(@PathVariable String reference) {
+        try {
+            var rr = invoiceService.getRefundRequestByReference(reference);
+            return ResponseEntity.ok(rr);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

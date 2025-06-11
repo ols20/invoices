@@ -11,6 +11,11 @@ public class Invoice {
     private LocalDate date;
     private String status;
     private List<LineItem> lineItems;
+    private String refundReason; // for refund requests only
+
+    public Invoice() {
+        // Default constructor for deserialization
+    }
 
     public Invoice(String id, String description, double amount, LocalDate date, String status) {
         this.id = id;
@@ -71,6 +76,14 @@ public class Invoice {
 
     public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
+    }
+
+    public String getRefundReason() {
+        return refundReason;
+    }
+
+    public void setRefundReason(String refundReason) {
+        this.refundReason = refundReason;
     }
 
     public static class LineItem {

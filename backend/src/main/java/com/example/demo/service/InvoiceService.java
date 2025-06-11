@@ -14,6 +14,7 @@ public class InvoiceService {
 
     private final List<Invoice> invoices = new ArrayList<>();
     private final List<ChangeRequest> changeRequests = new CopyOnWriteArrayList<>();
+    private final List<RefundRequest> refundRequests = new CopyOnWriteArrayList<>();
 
     public InvoiceService() {
         Random random = new Random();
@@ -124,6 +125,27 @@ public class InvoiceService {
         public void setAdminComment(String comment) { this.adminComment = comment; this.updatedAt = System.currentTimeMillis(); }
     }
 
+    public static class RefundRequest {
+        private String reference;
+        private String invoiceId;
+        private String reason;
+        private String status; // pending, approved, rejected
+        private long createdAt;
+        public RefundRequest(String reference, String invoiceId, String reason) {
+            this.reference = reference;
+            this.invoiceId = invoiceId;
+            this.reason = reason;
+            this.status = "pending";
+            this.createdAt = System.currentTimeMillis();
+        }
+        public String getReference() { return reference; }
+        public String getInvoiceId() { return invoiceId; }
+        public String getReason() { return reason; }
+        public String getStatus() { return status; }
+        public long getCreatedAt() { return createdAt; }
+        public void setStatus(String status) { this.status = status; }
+    }
+
     public ChangeRequestResponse requestChange(Object request) {
         // Generate a unique reference number
         String reference = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
@@ -146,8 +168,25 @@ public class InvoiceService {
     }
 
     public String requestRefund(Invoice invoice) {
-        // Logic to request refund
-        return "Refund request submitted for invoice: " + invoice.getId();
+        String reason = null;
+        try {
+            java.lang.reflect.Field f = invoice.getClass().getDeclaredField("refundReason");
+            f.setAccessible(true);
+            reason = (String) f.get(invoice);
+        } catch (Exception e) {
+            // fallback: no reason provided
+        }
+        String reference = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        RefundRequest rr = new RefundRequest(reference, invoice.getId(), reason);
+        refundRequests.add(rr);
+        return "{\"message\":\"Refund request submitted! Reference: " + reference + "\"}";
+    }
+
+    public RefundRequest getRefundRequestByReference(String reference) {
+        return refundRequests.stream()
+            .filter(rr -> rr.getReference().equals(reference))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Refund request not found"));
     }
 
     public Invoice getInvoiceById(String id) {

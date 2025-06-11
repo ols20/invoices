@@ -132,3 +132,19 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Refund shortcut button styling */
+.refund-shortcut {
+  background-color: #dc3545 !important;
+  color: white !important;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.refund-shortcut:hover {
+  background-color: #b52a37 !important;
+}
