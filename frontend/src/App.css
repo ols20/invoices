@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  margin-top: 13vh; /* increased for more space below header */
 }
 
 .App-logo {
@@ -16,6 +17,10 @@
 }
 
 .App-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background-color: #007bff;
   min-height: 10vh;
   display: flex;
@@ -24,6 +29,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .App-header h1 {
@@ -38,6 +45,12 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.invoice-details-container {
+  margin-top: 2.5rem; /* extra spacing below header for details/forms */
 }
 
 @keyframes App-logo-spin {

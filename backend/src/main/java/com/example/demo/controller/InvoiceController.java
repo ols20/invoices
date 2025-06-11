@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.model.Invoice;
 import com.example.demo.service.InvoiceService;
+import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,9 @@ public class InvoiceController {
     }
 
     @PostMapping("/request-change")
-    public String requestChange(@RequestBody Invoice invoice) {
-        return invoiceService.requestChange(invoice);
+    public ResponseEntity<?> requestChange(@RequestBody Object request) {
+        var response = invoiceService.requestChange(request);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/request-refund")
@@ -33,5 +35,15 @@ public class InvoiceController {
     @GetMapping("/{id}")
     public Invoice getInvoiceById(@PathVariable String id) {
         return invoiceService.getInvoiceById(id);
+    }
+
+    @GetMapping("/change-request/{reference}")
+    public ResponseEntity<?> getChangeRequest(@PathVariable String reference) {
+        try {
+            var cr = invoiceService.getChangeRequestByReference(reference);
+            return ResponseEntity.ok(cr);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

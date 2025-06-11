@@ -6,11 +6,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class InvoiceService {
 
     private final List<Invoice> invoices = new ArrayList<>();
+    private final List<ChangeRequest> changeRequests = new CopyOnWriteArrayList<>();
 
     public InvoiceService() {
         Random random = new Random();
@@ -76,9 +79,70 @@ public class InvoiceService {
         return invoices;
     }
 
-    public String requestChange(Invoice invoice) {
-        // Logic to request change
-        return "Change request submitted for invoice: " + invoice.getId();
+    public static class ChangeRequestResponse {
+        private String reference;
+        private String message;
+        public ChangeRequestResponse(String reference, String message) {
+            this.reference = reference;
+            this.message = message;
+        }
+        public String getReference() { return reference; }
+        public String getMessage() { return message; }
+    }
+
+    public static class ChangeRequest {
+        private String reference;
+        private String invoiceId;
+        private List<Object> items;
+        private String reason;
+        private String status; // pending, in review, approved, rejected
+        private String adminComment;
+        private String userEmail;
+        private long createdAt;
+        private long updatedAt;
+        public ChangeRequest(String reference, String invoiceId, List<Object> items, String reason, String userEmail) {
+            this.reference = reference;
+            this.invoiceId = invoiceId;
+            this.items = items;
+            this.reason = reason;
+            this.status = "pending";
+            this.adminComment = "";
+            this.userEmail = userEmail;
+            this.createdAt = System.currentTimeMillis();
+            this.updatedAt = this.createdAt;
+        }
+        public String getReference() { return reference; }
+        public String getInvoiceId() { return invoiceId; }
+        public List<Object> getItems() { return items; }
+        public String getReason() { return reason; }
+        public String getStatus() { return status; }
+        public String getAdminComment() { return adminComment; }
+        public String getUserEmail() { return userEmail; }
+        public long getCreatedAt() { return createdAt; }
+        public long getUpdatedAt() { return updatedAt; }
+        public void setStatus(String status) { this.status = status; this.updatedAt = System.currentTimeMillis(); }
+        public void setAdminComment(String comment) { this.adminComment = comment; this.updatedAt = System.currentTimeMillis(); }
+    }
+
+    public ChangeRequestResponse requestChange(Object request) {
+        // Generate a unique reference number
+        String reference = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
+        // Parse request
+        String invoiceId = (String)((java.util.Map<?,?>)request).get("invoiceId");
+        List<Object> items = (List<Object>)((java.util.Map<?,?>)request).get("items");
+        String reason = (String)((java.util.Map<?,?>)request).get("reason");
+        String userEmail = ((java.util.Map<?,?>)request).containsKey("userEmail") ? String.valueOf(((java.util.Map<?,?>)request).get("userEmail")) : "user@example.com";
+        ChangeRequest cr = new ChangeRequest(reference, invoiceId, items, reason, userEmail);
+        changeRequests.add(cr);
+        // TODO: Send email notification
+        return new ChangeRequestResponse(reference, "Change request submitted and email sent.");
+    }
+
+    public ChangeRequest getChangeRequestByReference(String reference) {
+        return changeRequests.stream()
+            .filter(cr -> cr.getReference().equals(reference))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Change request not found"));
     }
 
     public String requestRefund(Invoice invoice) {
