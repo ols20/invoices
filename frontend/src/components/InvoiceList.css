@@ -88,7 +88,7 @@
 }
 
 .invoice-table th, .invoice-table td {
-  padding: 0.85rem 0.7rem;
+  padding: 0.45rem 0.5rem;
   text-align: left;
   border-bottom: 1px solid #e3e3e3;
   transition: background 0.2s;

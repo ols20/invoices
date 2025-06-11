@@ -10,7 +10,7 @@ body {
 
 .App {
   text-align: center;
-  margin-top: 13vh;
+  margin-top: 0;
   padding: 2.5rem 1.5rem 2rem 1.5rem;
   border-radius: 0;
   background: rgba(255,255,255,0.95);
@@ -64,7 +64,7 @@ body {
 }
 
 .invoice-details-container {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 
 .invoice-app-header-icon {
