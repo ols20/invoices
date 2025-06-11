@@ -5,7 +5,7 @@ import './InvoiceList.css';
 
 const InvoiceList = () => {
   const [invoices, setInvoices] = useState([]);
-  const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'asc' });
+  const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'desc' });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const navigate = useNavigate();
@@ -24,6 +24,15 @@ const InvoiceList = () => {
   };
 
   const sortedInvoices = [...invoices].sort((a, b) => {
+    if (sortConfig.key === 'id') {
+      // sort by numeric value of id
+      const aId = parseInt(a.id, 10);
+      const bId = parseInt(b.id, 10);
+      if (isNaN(aId) || isNaN(bId)) {
+        return 0;
+      }
+      return sortConfig.direction === 'asc' ? aId - bId : bId - aId;
+    }
     if (a[sortConfig.key] < b[sortConfig.key]) {
       return sortConfig.direction === 'asc' ? -1 : 1;
     }
@@ -46,6 +55,9 @@ const InvoiceList = () => {
       <table className="invoice-table">
         <thead>
           <tr>
+            <th onClick={() => handleSort('id')}>
+              ID {sortConfig.key === 'id' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+            </th>
             <th onClick={() => handleSort('description')}>
               Name {sortConfig.key === 'description' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
             </th>
@@ -64,6 +76,7 @@ const InvoiceList = () => {
         <tbody>
           {paginatedInvoices.map(invoice => (
             <tr key={invoice.id}>
+              <td>{invoice.id}</td>
               <td>{invoice.description}</td>
               <td>{new Date(invoice.date).toLocaleDateString()}</td>
               <td>${(invoice.amount || 0).toFixed(2)}</td>
