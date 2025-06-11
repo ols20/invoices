@@ -99,7 +99,7 @@
 }
 
 .invoice-actions button:hover, .refund-button:hover, .action-button:hover {
-  background: #071274;
+  background: #0056b3;
   box-shadow: 0 4px 16px rgba(0,0,0,0.13);
 }
 
