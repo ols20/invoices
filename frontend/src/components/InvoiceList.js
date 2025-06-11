@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './InvoiceList.css';
 
 const InvoiceList = () => {
@@ -7,12 +8,20 @@ const InvoiceList = () => {
   const [sortConfig, setSortConfig] = useState({ key: 'date', direction: 'asc' });
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:8080/api/invoices')
       .then(response => setInvoices(response.data))
       .catch(error => console.error('Error fetching invoices:', error));
   }, []);
+
+  const handleSort = (key) => {
+    setSortConfig((prevConfig) => ({
+      key,
+      direction: prevConfig.key === key && prevConfig.direction === 'asc' ? 'desc' : 'asc',
+    }));
+  };
 
   const sortedInvoices = [...invoices].sort((a, b) => {
     if (a[sortConfig.key] < b[sortConfig.key]) {
@@ -23,13 +32,6 @@ const InvoiceList = () => {
     }
     return 0;
   });
-
-  const handleSort = (key) => {
-    setSortConfig((prevConfig) => ({
-      key,
-      direction: prevConfig.key === key && prevConfig.direction === 'asc' ? 'desc' : 'asc',
-    }));
-  };
 
   const paginatedInvoices = sortedInvoices.slice(
     (currentPage - 1) * itemsPerPage,
@@ -44,10 +46,18 @@ const InvoiceList = () => {
       <table className="invoice-table">
         <thead>
           <tr>
-            <th onClick={() => handleSort('description')}>Name</th>
-            <th onClick={() => handleSort('date')}>Date</th>
-            <th onClick={() => handleSort('totalAmount')}>Total Amount</th>
-            <th onClick={() => handleSort('status')}>Status</th>
+            <th onClick={() => handleSort('description')}>
+              Name {sortConfig.key === 'description' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+            </th>
+            <th onClick={() => handleSort('date')}>
+              Date {sortConfig.key === 'date' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+            </th>
+            <th onClick={() => handleSort('totalAmount')}>
+              Total Amount {sortConfig.key === 'totalAmount' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+            </th>
+            <th onClick={() => handleSort('status')}>
+              Status {sortConfig.key === 'status' && (sortConfig.direction === 'asc' ? '▲' : '▼')}
+            </th>
             <th>Action</th>
           </tr>
         </thead>
@@ -58,7 +68,14 @@ const InvoiceList = () => {
               <td>{new Date(invoice.date).toLocaleDateString()}</td>
               <td>${(invoice.amount || 0).toFixed(2)}</td>
               <td>{invoice.status || 'Unknown'}</td>
-              <td><button className="action-button">View Details</button></td>
+              <td>
+                <button
+                  className="action-button"
+                  onClick={() => navigate(`/invoice/${invoice.id}`)}
+                >
+                  View Details
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>

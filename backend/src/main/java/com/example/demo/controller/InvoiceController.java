@@ -29,4 +29,9 @@ public class InvoiceController {
     public String requestRefund(@RequestBody Invoice invoice) {
         return invoiceService.requestRefund(invoice);
     }
+
+    @GetMapping("/{id}")
+    public Invoice getInvoiceById(@PathVariable String id) {
+        return invoiceService.getInvoiceById(id);
+    }
 }

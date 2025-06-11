@@ -42,4 +42,11 @@ public class InvoiceService {
         // Logic to request refund
         return "Refund request submitted for invoice: " + invoice.getId();
     }
+
+    public Invoice getInvoiceById(String id) {
+        return invoices.stream()
+                .filter(invoice -> invoice.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Invoice not found"));
+    }
 }

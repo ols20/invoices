@@ -1,0 +1,93 @@
+.invoice-details-container {
+  max-width: 100%; /* Expand container to full width */
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.invoice-details-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px; /* Adjust header size to match Invoice List */
+  font-weight: bold;
+}
+
+.invoice-details-container .field {
+  width: 50vw; /* Expand fields to half the viewport width */
+  min-width: 350px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto; /* Center horizontally */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 16px; /* Adjust text size to match the invoice list */
+}
+
+.invoice-details-container .field strong {
+  flex: 1;
+  text-align: left;
+}
+
+.invoice-details-container .field span {
+  flex: 2;
+  text-align: right;
+}
+
+.invoice-details-container ul {
+  width: 50vw;
+  min-width: 350px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto; /* Center horizontally */
+  padding-left: 0;
+}
+
+.invoice-details-container ul li {
+  font-size: 16px; /* Adjust text size for list items */
+}
+
+.invoice-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.invoice-actions button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.invoice-actions button:hover {
+  background-color: #0056b3;
+}
+
+.back-button {
+  width: 90px; /* Set to a small fixed width */
+  padding: 10px 0; /* Adjust padding for small width */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  align-self: flex-start; /* Align to the left */
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
