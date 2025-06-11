@@ -46,44 +46,68 @@
 
 /* General container styling */
 .invoice-list-container {
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem 1.5rem;
+  background: rgba(255,255,255,0.98);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+  width: 110vw;
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 700px) {
+  .invoice-list-container {
+    width: 99vw;
+    max-width: none;
+    padding: 0.5rem 0.1rem;
+  }
 }
 
 .invoice-list-title {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  color: #333;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #1a237e;
   text-align: center;
+  letter-spacing: 1px;
 }
 
 /* Table styling */
 .invoice-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   margin-top: 1rem;
-  background-color: white;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  font-size: 1.08em;
 }
 
 .invoice-table th, .invoice-table td {
-  padding: 0.5rem; /* Reduced padding for smaller row height */
+  padding: 0.85rem 0.7rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e3e3e3;
+  transition: background 0.2s;
 }
 
 .invoice-table th {
-  background-color: #007bff;
-  color: white;
+  background: linear-gradient(90deg, #007bff 70%, #4f8cff 100%);
+  color: #fff;
   font-weight: bold;
+  border: none;
+  font-size: 1.05em;
 }
 
 .invoice-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f0f6ff;
+}
+
+.invoice-table tr:last-child td {
+  border-bottom: none;
 }
 
 /* Status styling */
@@ -111,40 +135,64 @@
 
 /* Button styling */
 .action-button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
+  padding: 0.5rem 1.2rem;
+  background: linear-gradient(90deg, #007bff 70%, #4f8cff 100%);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s ease;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .action-button:hover {
-  background-color: #071274;
+  background: #071274;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.13);
 }
 
 /* Pagination styling */
 .pagination {
-  margin-top: 20px; /* Increase the margin to lower the buttons */
+  margin-top: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 18px;
 }
 
-/* Refund shortcut button styling */
-.refund-shortcut {
-  background-color: #dc3545 !important;
-  color: white !important;
+.pagination button {
+  padding: 0.4rem 1.1rem;
+  border-radius: 6px;
   border: none;
-  border-radius: 4px;
-  padding: 5px 10px;
-  margin-left: 8px;
-  font-size: 15px;
+  background: #e3e9f7;
+  color: #1a237e;
+  font-weight: 500;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-.refund-shortcut:hover {
-  background-color: #b52a37 !important;
+.pagination button:disabled {
+  background: #f0f0f0;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.pagination button:not(:disabled):hover {
+  background: #b3c6ff;
+}
+
+@media (max-width: 700px) {
+  .invoice-list-container {
+    padding: 0.5rem 0.1rem;
+    max-width: none;
+    width: 100vw;
+  }
+  .invoice-table th, .invoice-table td {
+    padding: 0.5rem 0.2rem;
+    font-size: 0.98em;
+  }
+  .invoice-list-title {
+    font-size: 1.2rem;
+  }
 }

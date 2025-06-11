@@ -1,8 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap');
 
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(120deg, #e0e7ff 0%, #f8fafc 100%);
+  min-height: 100vh;
+}
+
 .App {
   text-align: center;
-  margin-top: 13vh; /* increased for more space below header */
+  margin-top: 13vh;
+  padding: 2.5rem 1.5rem 2rem 1.5rem;
+  border-radius: 0;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+  max-width: 1850px;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100vw;
 }
 
 .App-logo {
@@ -21,43 +37,42 @@
   top: 0;
   left: 0;
   width: 100vw;
-  background-color: #007bff;
-  min-height: 15vh;
+  background: linear-gradient(90deg, #007bff 60%, #4f8cff 100%);
+  min-height: 13vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(12px + 2.2vmin);
   color: white;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 
 .App-header h1 {
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 2.2em;
+  margin: 0 0 0 0;
+  letter-spacing: 1px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
 .invoice-details-container {
-  margin-top: 2.5rem; /* extra spacing below header for details/forms */
+  margin-top: 2.5rem;
 }
 
 .invoice-app-header-icon {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
+  width: 44px;
+  height: 44px;
+  margin-right: 12px;
   vertical-align: middle;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.10));
 }
 
 @keyframes App-logo-spin {
@@ -66,5 +81,25 @@ body {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .App {
+    padding: 1rem 0.2rem 1.5rem 0.2rem;
+    max-width: 99vw;
+  }
+  .App-header {
+    min-height: 9vh;
+    font-size: 1.1em;
+    border-radius: 0 0 12px 12px;
+  }
+  .App-header h1 {
+    font-size: 1.2em;
+  }
+  .invoice-app-header-icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 7px;
   }
 }
