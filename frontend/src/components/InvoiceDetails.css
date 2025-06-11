@@ -91,3 +91,34 @@
 .back-button:hover {
   background-color: #0056b3;
 }
+
+.line-items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.line-items-table th,
+.line-items-table td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.line-items-table th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.line-items-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.line-items-table tr:last-child td {
+  border-bottom: none;
+}

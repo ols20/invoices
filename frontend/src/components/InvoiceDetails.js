@@ -45,15 +45,28 @@ const InvoiceDetails = () => {
         <strong>Status:</strong>
         <span>{invoice.status}</span>
       </div>
-      
-      <ul>
-        {invoice.lineItems?.map((item, index) => (
-          <li key={index} className="field">
-            <strong>{item.description}</strong>
-            <span>${item.cost.toFixed(2)}</span>
-          </li>
-        ))}
-      </ul>
+
+      <h3 style={{textAlign: 'center', margin: '20px 0 10px 0'}}>Line Items</h3>
+      <table className="line-items-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th style={{textAlign: 'right'}}>Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          {invoice.lineItems && invoice.lineItems.length > 0 ? (
+            invoice.lineItems.map((item, index) => (
+              <tr key={index}>
+                <td>{item.description}</td>
+                <td style={{textAlign: 'right'}}>${item.cost.toFixed(2)}</td>
+              </tr>
+            ))
+          ) : (
+            <tr><td colSpan={2} style={{textAlign: 'center'}}>No line items</td></tr>
+          )}
+        </tbody>
+      </table>
 
       <div className="invoice-actions">
         <button onClick={() => console.log('Download invoice:', invoice.id)}>Download</button>
